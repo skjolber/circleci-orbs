@@ -21,13 +21,15 @@ if [ -n "<< parameters.whitelist >>" ]; then
     WHITELIST="-w /whitelist.yml"
 fi
 
+mkdir -p /tmp/reports
+
 if [ -n "<< parameters.image_file >>" ]; then
     images=$(cat "<< parameters.image_file >>")
     for image in $images; do
         docker pull "$image"
-        docker exec -it $CLAIR_SCANNER clair-scanner --ip ${scanner_ip} --clair=http://${clair_ip}:6060 -t "<< parameters.severity_threshold >>" $WHITELIST "$image"
+        docker exec -it $CLAIR_SCANNER clair-scanner --ip ${scanner_ip} --clair=http://${clair_ip}:6060 -t "<< parameters.severity_threshold >>" --report "/tmp/reports/${image}.json" $WHITELIST "$image"
     done
 else
     docker pull "<< parameters.image >>"
-    docker exec -it $CLAIR_SCANNER clair-scanner --ip ${scanner_ip} --clair=http://${clair_ip}:6060 -t "<< parameters.severity_threshold >>" $WHITELIST "<< parameters.image >>"
+    docker exec -it $CLAIR_SCANNER clair-scanner --ip ${scanner_ip} --clair=http://${clair_ip}:6060 -t "<< parameters.severity_threshold >>" --report "/tmp/reports/<< parameters.image >>.json" $WHITELIST "<< parameters.image >>"
 fi
