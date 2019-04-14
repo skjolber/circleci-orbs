@@ -22,5 +22,5 @@ jobs:
 workflows:
   test:
     jobs:
-    - scan_images
+#    - scan_images
     - scan_image
