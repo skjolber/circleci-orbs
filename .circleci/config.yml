@@ -9,7 +9,7 @@ jobs:
     steps:
     - run: |
         echo "debian:stretch" > /images.txt
-        echo "debian:sid" >> /images.txt
+        echo "mongo" >> /images.txt
     - clair/scan:
         image_file: /images.txt
 
@@ -17,7 +17,7 @@ jobs:
     executor: clair/default
     steps:
     - clair/scan:
-        image: debian:jessie
+        image: mongo
 
 workflows:
   test:
