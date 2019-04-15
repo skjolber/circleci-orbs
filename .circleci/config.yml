@@ -1,26 +1,16 @@
 version: 2.1
 
 orbs:
-  clair: ovotech/clair-scanner@1.4.24
+  clair: ovotech/clair-scanner@dev:report-path-fix
 
 jobs:
-  scan_images:
-    executor: clair/default
-    steps:
-    - run: |
-        echo "debian:stretch" > /images.txt
-        echo "mongo" >> /images.txt
-    - clair/scan:
-        image_file: /images.txt
-
   scan_image:
     executor: clair/default
     steps:
     - clair/scan:
-        image: mongo
+        image: jenkins/jenkins:lts-slim
 
 workflows:
   test:
     jobs:
-    - scan_images
     - scan_image
