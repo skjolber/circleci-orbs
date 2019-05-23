@@ -30,9 +30,15 @@ elif [[ $TF_EXIT -eq 2 ]]; then
     cat plan.txt
 
     if [ -n "$GITHUB_TOKEN" ]; then
-        export CIRCLE_PR_NUMBER="${CIRCLE_PR_NUMBER:-${CIRCLE_PULL_REQUEST##*/}}"
-        export TF_ENV_LABEL="<< parameters.label >>"
-        python3 /tmp/put_plan.py "$module_path" "$workspace" "$INIT_ARGS" "$PLAN_ARGS" <plan.txt
+
+        if [ -n "$CIRCLE_PULL_REQUEST" ]; then
+            echo "Build is not for an open PR"
+        else
+
+            export CIRCLE_PR_NUMBER="${CIRCLE_PR_NUMBER:-${CIRCLE_PULL_REQUEST##*/}}"
+            export TF_ENV_LABEL="<< parameters.label >>"
+            python3 /tmp/put_plan.py "$module_path" "$workspace" "$INIT_ARGS" "$PLAN_ARGS" <plan.txt
+        fi
     fi
 
 fi
