@@ -12,7 +12,7 @@ An executor defines the docker image to use for jobs.
 
 The executor named `default` is that same as `terraform_0.11`
 
-### terraform_0.11
+### terraform-0_11
 
 This executor uses terraform 0.11
 
@@ -23,7 +23,7 @@ It also contains:
 - google-cloud-sdk
 - aws-cli
 
-### terraform_0.12
+### terraform-0_12
 
 This executor uses terraform 0.12
 
