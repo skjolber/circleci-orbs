@@ -5,7 +5,15 @@ executors:
   default:
     description: "Terraform executor"
     docker:
-      - image: ovotech/terraform:latest
+      - image: ovotech/terraform:0.11
+  terraform-0.11:
+    description: "Terraform 0.11 executor"
+    docker:
+      - image: ovotech/terraform:0.11
+  terraform-0.12:
+    description: "Terraform 0.12 executor"
+    docker:
+      - image: ovotech/terraform:0.12
 
 commands:
   plan:
