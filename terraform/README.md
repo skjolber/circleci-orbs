@@ -10,9 +10,9 @@ An executor defines the docker image to use for jobs.
 
 ### default
 
-The executor named `default` is that same as `terraform 0.11`
+The executor named `default` is that same as `terraform_0.11`
 
-### terraform-0.11
+### terraform_0.11
 
 This executor uses terraform 0.11
 
@@ -23,7 +23,7 @@ It also contains:
 - google-cloud-sdk
 - aws-cli
 
-### terraform-0.12
+### terraform_0.12
 
 This executor uses terraform 0.12
 
@@ -189,7 +189,7 @@ orbs:
 
 jobs:
   terraform_plan:
-    executor: terraform/terraform-0.11
+    executor: terraform/terraform_0.11
     steps:
     - checkout
     - run:
@@ -223,7 +223,7 @@ jobs:
         path: terraform/deployments/sqs-test
 
   terraform_apply:
-    executor: terraform/terraform-0.11
+    executor: terraform/terraform_0.11
     steps:
     - checkout
     - run:
