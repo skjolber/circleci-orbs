@@ -5,17 +5,29 @@ It is published as ovotech/terraform@1
 
 ## Executors
 
-The orb provides an executor for running terraform commands.
-This defines a docker image to use for jobs.
+The orb provides executors for running terraform commands.
+An executor defines the docker image to use for jobs.
 
 ### default
 
-The executor is named 'default'
+The executor named `default` is that same as `terraform 0.11`
+
+### terraform-0.11
+
+This executor uses terraform 0.11
 
 It also contains:
 - ovo's terraform-provider-aiven
 - helm + terraform-provider-helm
 - terraform-provider-acme
+- google-cloud-sdk
+- aws-cli
+
+### terraform-0.12
+
+This executor uses terraform 0.12
+
+It also contains:
 - google-cloud-sdk
 - aws-cli
 
@@ -177,7 +189,7 @@ orbs:
 
 jobs:
   terraform_plan:
-    executor: terraform/default
+    executor: terraform/terraform-0.11
     steps:
     - checkout
     - run:
@@ -211,7 +223,7 @@ jobs:
         path: terraform/deployments/sqs-test
 
   terraform_apply:
-    executor: terraform/default
+    executor: terraform/terraform-0.11
     steps:
     - checkout
     - run:
