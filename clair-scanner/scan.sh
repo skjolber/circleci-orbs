@@ -34,9 +34,9 @@ function scan() {
 
     if ! docker exec -it $CLAIR_SCANNER clair-scanner --ip ${scanner_ip} --clair=http://${clair_ip}:6060 -t "<< parameters.severity_threshold >>" --report "/report.json" $WHITELIST "$image"; then
         EXIT_STATUS=1
+    else
+        docker cp "$CLAIR_SCANNER:/report.json" "$REPORT_DIR/${image}.json"
     fi
-
-    docker cp "$CLAIR_SCANNER:/report.json" "$REPORT_DIR/${image}.json"
 }
 
 if [ -n "<< parameters.image_file >>" ]; then
